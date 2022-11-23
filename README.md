@@ -1,21 +1,78 @@
-# webhooks
-simple webhook that trigger bash script
+
+# simple-webhook
+
+A simple webhook that will trigger a bash script, log, and notify when success or failed.
 
 
-example with parameters
-    http://localhost:8989/webhooks/bitbucket/web-game_lobby
-        ?script=/home/ced/workspaces/web-game_lobby/build-dev.sh
-        &callback_success=http://localhost:8989/notify?text=branch $branch name $name message $message
-        &callback_failed=http://localhost:8989/notify?error=$error
-        &callback_log=http://localhost:8989/notify?log=$log
+## Authors
+
+- [@spadefaith](https://www.github.com/spadefaith)
 
 
-payloads
-    callback_success - 
-        {name, branch, message}
+## API Reference
 
-    callback_failed -
-        {error}
+#### webhook endpoint
 
-    callback_log - 
-        {log}
+```http
+  POST /webhhooks/:type/:repo
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `script` | `string` | **Required**. path to bash script |
+| `callback_success` | `string` | **Required**. callback url when success |
+| `callback_failed` | `string` | **Required**. callback url when failed |
+| `callback_log` | `string` | **Required**. callback url for log |
+
+
+
+
+```http
+  GET /callback__success
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `name` | `string` | username of who committed |
+| `message` | `string` | commit message |
+| `branch` | `string` | branch commited |
+
+
+
+```http
+  GET /callback__failed
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `error` | `string` | error message |
+
+
+```http
+  GET /callback_log
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `text` | `string` | output of "echo" |
+
+## Documentation
+
+In order to add the parameters in the callback url,
+add "$" before the parameter name, it will be replaced by the correct value.
+
+
+example callback_log -
+http://localhost:8989/notify?log=$text
+
+
+example callback_failed -
+http://localhost:8989/notify?error=$error
+
+
+example callback_success -
+http://localhost:8989/notify?text=$branch_$name_$message
+
+
+
+
