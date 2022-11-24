@@ -23,7 +23,10 @@ app.post('/webhooks/bitbucket/:repo',async function(req,res,next){
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
         repo = req.params.repo;
 
+
         req.body.repo = repo;
+
+        console.log(29,req.query);
 
         await Controller({
             script,callbackFailed,callbackSuccess,repo,callbackLog
@@ -51,7 +54,7 @@ app.post('/webhooks/github/:repo',async function(req,res,next){
         },req.body,ParseGithub)
         return res.json({status:1});
     } catch(err){
-
+        console.log(err);
         return res.json({status:0});
     };
 });
