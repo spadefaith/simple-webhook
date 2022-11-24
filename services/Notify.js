@@ -9,12 +9,12 @@ function recurse(arr,callback,callbackFinish,index){
             index++;
             setTimeout(()=>{
                 recurse(arr, callback,callbackFinish,index)
-            },1000);
+            },300);
         }).catch(err=>{
             index++;
             setTimeout(()=>{
                 recurse(arr, callback,callbackFinish,index)
-            },1000);
+            },300);
         });
 
     } else {
