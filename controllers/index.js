@@ -20,18 +20,13 @@ module.exports = async function(data,body,parser){
                 await TriggerHttp(script, data);
             } else {
                 await TriggerBash(script, async function(logs){
-                    console.log(23, logs);
-
-                    await Promise.all(logs.map(log=>{
-                        let params = {
+                    logs = logs.map(log=>{
+                        return {
                             log,text:log,message:log,repo
                         };
-                        if(callbackLog){
-                            return Notify(ReplaceVariable(callbackLog,params));
-                        } else {
-                            return Promise.resolve('no callbackLog');
-                        }
-                    }))
+                    });
+
+                    return Notify(callbackLog, logs);
 
                     
                 });
@@ -40,15 +35,15 @@ module.exports = async function(data,body,parser){
 
 
 
-        callbackSuccess && (await Notify(ReplaceVariable(callbackSuccess,{
+        callbackSuccess && (await Notify(callbackSuccess,[{
             message,name,branch,repo
-        })));
+        }]));
 
     } catch(err){
 
-        callbackFailed && (await Notify(ReplaceVariable(callbackFailed,{
+        callbackFailed && (await Notify(callbackFailed, [{
             error:err.message
-        })));
+        }]));
         throw err;
     };
 };
