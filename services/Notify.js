@@ -7,10 +7,14 @@ function recurse(arr,callback,callbackFinish,index=0){
 
         callback(arr[index]).then(()=>{
             index++;
-            recurse(arr, index);
+            setTimeout(()=>{
+                recurse(arr, callback,callbackFinish,index)
+            },1000);
         }).catch(err=>{
             index++;
-            recurse(arr, callback,callbackFinish,index);
+            setTimeout(()=>{
+                recurse(arr, callback,callbackFinish,index)
+            },1000);
         });
 
     } else {
