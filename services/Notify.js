@@ -23,18 +23,20 @@ function recurse(arr,callback,callbackFinish,index){
 }
 
 
-module.exports = function(url, params){
+module.exports = function(urls, params){
 
-
+    console.log(28,urls);
+    
     return new Promise((res, rej)=>{
         recurse(params, function(param,index){
             // console.log(index);
-
-            let replacedUrls = ReplaceVariable(url, param);
-
+            
+            let replacedUrls = ReplaceVariable(urls, param);
+            
             return new Promise((res, rej)=>{
                 recurse(replacedUrls, function(url, index){
-  
+                    
+                    console.log(28,url);
 
                     return axios(url).then(res=>res.data)
                     .then(res=>{
