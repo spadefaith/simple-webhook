@@ -42,7 +42,7 @@ app.post('/webhooks/bitbucket/:repo/:current_branch',async function(req,res,next
 });
 
 app.post('/webhooks/github/:repo/:current_branch',async function(req,res,next){
-    let callbackSuccess, script, callbackFailed, callbackLog, repo;
+    let callbackSuccess, script, callbackFailed, callbackLog, repo, current_branch;
     try {
         script = req.query.script;
         callbackSuccess = req.query.callback_success ? req.query.callback_success.split("|") : [];
@@ -51,11 +51,15 @@ app.post('/webhooks/github/:repo/:current_branch',async function(req,res,next){
         repo = req.params.repo;
         current_branch = req.params.current_branch;
 
+
+
         req.body.repo = repo;
         req.body.current_branch = current_branch;
 
+        // console.log(29,req.query);
+
         Controller({
-            script,callbackFailed,callbackSuccess,repo,callbackLog
+            script,callbackFailed,callbackSuccess,repo,callbackLog,current_branch
         },req.body,ParseGithub)
         return res.json({status:1});
     } catch(err){
