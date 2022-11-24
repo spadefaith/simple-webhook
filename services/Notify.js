@@ -29,10 +29,12 @@ module.exports = function(url, params){
     return new Promise((res, rej)=>{
         recurse(params, function(param,index){
             // console.log(index);
+
             let replacedUrls = ReplaceVariable(url, param);
 
             return new Promise((res, rej)=>{
-                recurse(replacedUrls, function(url){
+                recurse(replacedUrls, function(url, index){
+  
 
                     return axios(url).then(res=>res.data)
                     .then(res=>{
