@@ -36,7 +36,7 @@ module.exports = function(urls, params){
             return new Promise((res, rej)=>{
                 recurse(replacedUrls, function(url, index){
                     
-                    console.log(28,url);
+                    // console.log(28,url);
 
                     return axios(url).then(res=>res.data)
                     .then(res=>{
