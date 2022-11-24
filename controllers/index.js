@@ -19,7 +19,10 @@ module.exports = async function(data,body,parser){
 
                 await TriggerHttp(script, data);
             } else {
-                await TriggerBash(script, async function(params){
+                await TriggerBash(script, async function(log){
+                    let params = {
+                        log,text:log,message:log,repo
+                    }
                     callbackLog && await ( Notify(ReplaceVariable(callbackLog,params)))
                 });
             };
