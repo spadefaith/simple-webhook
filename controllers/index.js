@@ -27,7 +27,7 @@ module.exports = async function(data,body,parser){
                     });
 
 
-                    console.log(30, logs);
+                    // console.log(30, logs);q
                     return Notify(callbackLog, logs);
 
                     
@@ -35,6 +35,7 @@ module.exports = async function(data,body,parser){
             };
         }
 
+        console.log(38, message,name,branch,repo);
 
 
         callbackSuccess && (await Notify(callbackSuccess,[{

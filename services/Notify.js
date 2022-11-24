@@ -25,7 +25,7 @@ function recurse(arr,callback,callbackFinish,index){
 
 module.exports = function(urls, params){
 
-    console.log(28,urls);
+    // console.log(28,urls);
     
     return new Promise((res, rej)=>{
         recurse(params, function(param,index){
