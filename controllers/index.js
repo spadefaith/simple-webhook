@@ -19,11 +19,21 @@ module.exports = async function(data,body,parser){
 
                 await TriggerHttp(script, data);
             } else {
-                await TriggerBash(script, async function(log){
-                    let params = {
-                        log,text:log,message:log,repo
-                    }
-                    callbackLog && await ( Notify(ReplaceVariable(callbackLog,params)))
+                await TriggerBash(script, async function(logs){
+                    console.log(23, logs);
+
+                    await Promise.all(logs.map(log=>{
+                        let params = {
+                            log,text:log,message:log,repo
+                        };
+                        if(callbackLog){
+                            return Notify(ReplaceVariable(callbackLog,params));
+                        } else {
+                            return Promise.resolve('no callbackLog');
+                        }
+                    }))
+
+                    
                 });
             };
         }
