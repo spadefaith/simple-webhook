@@ -7,6 +7,11 @@ const Controller = require('./controllers');
 
 app.use(express.json());
 
+app.use(function(req,res,next){
+    console.log(req.path);
+    next();
+})
+
 app.post('/test',async function(req,res,next){
 
     console.log(req.body)
