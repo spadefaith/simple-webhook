@@ -1,6 +1,7 @@
 
 module.exports = function(json){
 
+    console.log(4, json);
 
     let {ref, user_username:name, commits:[{message}]} = json;
     let branch = ref.split('/')[2];
