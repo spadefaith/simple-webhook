@@ -45,7 +45,7 @@ module.exports = function(urls, params){
                         console.log(45,index, res);
                         return Promise.resolve(res);
                     }).catch(err=>{
-                        console.log(48,err);
+                        console.log(48,err.message);
                         return Promise.resolve(err.message);
                     });
                 },res,index=0);
