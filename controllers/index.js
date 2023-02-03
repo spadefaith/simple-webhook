@@ -44,7 +44,7 @@ module.exports = async function(data,body,parser){
         // console.log(37, data);
         // console.log(38, message,name,branch,repo);
 
-        console.log(47, callbackSuccess);
+        // console.log(47, callbackSuccess);
 
         callbackSuccess && (await Notify(callbackSuccess,[{
             message,name,branch,repo

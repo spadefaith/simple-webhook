@@ -33,20 +33,20 @@ module.exports = function(urls, params){
             
             let replacedUrls = ReplaceVariable(urls, param);
 
-            console.log(36, replacedUrls);
+            // console.log(36, replacedUrls);
             
             return new Promise((res, rej)=>{
                 recurse(replacedUrls, function(url, index){
                                         
                     url = decodeURIComponent(url);
-                    console.log(28,url);
+                    // console.log(28,url);
 
                     return axios(url).then(res=>res.data)
                     .then(res=>{
-                        console.log(45,index, res);
+                        // console.log(45,index, res);
                         return Promise.resolve(res);
                     }).catch(err=>{
-                        console.log(48,err.message);
+                        // console.log(48,err.message);
                         return Promise.resolve(err.message);
                     });
                 },res,index=0);
