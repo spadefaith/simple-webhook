@@ -34,7 +34,7 @@ app.post('/webhooks/bitbucket/:repo/:current_branch',async function(req,res,next
         req.body.repo = repo;
         req.body.current_branch = current_branch;
 
-        // console.log(29,req.query);
+        console.log(29,req.query);
 
         Controller({
             script,callbackFailed,callbackSuccess,repo,callbackLog,current_branch
