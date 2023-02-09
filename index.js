@@ -83,6 +83,8 @@ app.post('/webhooks/gitlab/:repo/:current_branch',async function(req,res,next){
         repo = req.params.repo;
         current_branch = req.params.current_branch;
 
+        console.log(86, req.query);
+
 
 
         req.body.repo = repo;
