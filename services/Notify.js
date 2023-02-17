@@ -23,9 +23,13 @@ function recurse(arr,callback,callbackFinish,index){
 }
 
 
-module.exports = function(urls, params){
+module.exports = async function(urls, params){
 
     // console.log(28,urls);
+
+    if(!urls.length){
+        return ;
+    };
     
     return new Promise((res, rej)=>{
         recurse(params, function(param,index){
