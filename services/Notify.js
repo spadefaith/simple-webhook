@@ -25,7 +25,7 @@ function recurse(arr,callback,callbackFinish,index){
 
 module.exports = async function(urls, params){
 
-    // console.log(28,urls);
+    console.log(28,urls);
 
     if(!urls.length){
         return ;
@@ -37,13 +37,13 @@ module.exports = async function(urls, params){
             
             let replacedUrls = ReplaceVariable(urls, param);
 
-            // console.log(36, replacedUrls);
+            console.log(36, replacedUrls);
             
             return new Promise((res, rej)=>{
                 recurse(replacedUrls, function(url, index){
                                         
                     url = decodeURIComponent(url);
-                    // console.log(28,url);
+                    console.log(28,url);
 
                     return axios(url).then(res=>res.data)
                     .then(res=>{
