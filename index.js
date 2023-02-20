@@ -28,7 +28,7 @@ app.post('/webhooks/bitbucket/:repo/:current_branch',async function(req,res,next
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
         repo = req.params.repo;
         current_branch = req.params.current_branch;
-        notify_type = req.params.notify_type;
+        notify_type = req.query.notify_type;
 
 
 
@@ -56,7 +56,7 @@ app.post('/webhooks/github/:repo/:current_branch',async function(req,res,next){
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
         repo = req.params.repo;
         current_branch = req.params.current_branch;
-        notify_type = req.params.notify_type;
+        notify_type = req.query.notify_type;
 
 
 
@@ -84,7 +84,7 @@ app.post('/webhooks/gitlab/:repo/:current_branch',async function(req,res,next){
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
         repo = req.params.repo;
         current_branch = req.params.current_branch;
-        notify_type = req.params.notify_type;
+        notify_type = req.query.notify_type;
 
         // console.log(86, req.query);
 
@@ -115,7 +115,7 @@ app.post('/webhooks/json/:repo/:current_branch',async function(req,res,next){
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
         repo = req.params.repo;
         current_branch = req.params.current_branch;
-        notify_type = req.params.notify_type;
+        notify_type = req.query.notify_type;
 
 
 
