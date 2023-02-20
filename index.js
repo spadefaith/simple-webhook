@@ -20,7 +20,7 @@ app.post('/test',async function(req,res,next){
 });
 
 app.post('/webhooks/bitbucket/:repo/:current_branch',async function(req,res,next){
-    let callbackSuccess, script, callbackFailed, callbackLog, repo, current_branch;
+    let callbackSuccess, script, callbackFailed, callbackLog, repo, current_branch, notify_type;
     try {
         script = req.query.script;
         callbackSuccess = req.query.callback_success ? req.query.callback_success.split("|") : [];
@@ -28,6 +28,7 @@ app.post('/webhooks/bitbucket/:repo/:current_branch',async function(req,res,next
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
         repo = req.params.repo;
         current_branch = req.params.current_branch;
+        notify_type = req.params.notify_type;
 
 
 
@@ -37,7 +38,7 @@ app.post('/webhooks/bitbucket/:repo/:current_branch',async function(req,res,next
         // console.log(29,req.query);
 
         Controller({
-            script,callbackFailed,callbackSuccess,repo,callbackLog,current_branch
+            script,callbackFailed,callbackSuccess,repo,callbackLog,current_branch,notify_type
         },req.body,ParseBitbucket)
         return res.json({status:1});
     } catch(err){
@@ -47,7 +48,7 @@ app.post('/webhooks/bitbucket/:repo/:current_branch',async function(req,res,next
 });
 
 app.post('/webhooks/github/:repo/:current_branch',async function(req,res,next){
-    let callbackSuccess, script, callbackFailed, callbackLog, repo, current_branch;
+    let callbackSuccess, script, callbackFailed, callbackLog, repo, current_branch,notify_type;
     try {
         script = req.query.script;
         callbackSuccess = req.query.callback_success ? req.query.callback_success.split("|") : [];
@@ -55,6 +56,7 @@ app.post('/webhooks/github/:repo/:current_branch',async function(req,res,next){
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
         repo = req.params.repo;
         current_branch = req.params.current_branch;
+        notify_type = req.params.notify_type;
 
 
 
@@ -64,7 +66,7 @@ app.post('/webhooks/github/:repo/:current_branch',async function(req,res,next){
         // console.log(29,req.query);
 
         Controller({
-            script,callbackFailed,callbackSuccess,repo,callbackLog,current_branch
+            script,callbackFailed,callbackSuccess,repo,callbackLog,current_branch,notify_type
         },req.body,ParseGithub)
         return res.json({status:1});
     } catch(err){
@@ -74,7 +76,7 @@ app.post('/webhooks/github/:repo/:current_branch',async function(req,res,next){
 });
 
 app.post('/webhooks/gitlab/:repo/:current_branch',async function(req,res,next){
-    let callbackSuccess, script, callbackFailed, callbackLog, repo, current_branch;
+    let callbackSuccess, script, callbackFailed, callbackLog, repo, current_branch, notify_type;
     try {
         script = req.query.script;
         callbackSuccess = req.query.callback_success ? req.query.callback_success.split("|") : [];
@@ -82,8 +84,9 @@ app.post('/webhooks/gitlab/:repo/:current_branch',async function(req,res,next){
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
         repo = req.params.repo;
         current_branch = req.params.current_branch;
+        notify_type = req.params.notify_type;
 
-        console.log(86, req.query);
+        // console.log(86, req.query);
 
 
 
@@ -93,7 +96,7 @@ app.post('/webhooks/gitlab/:repo/:current_branch',async function(req,res,next){
         // console.log(29,req.query);
 
         Controller({
-            script,callbackFailed,callbackSuccess,repo,callbackLog,current_branch
+            script,callbackFailed,callbackSuccess,repo,callbackLog,current_branch, notify_type
         },req.body,ParseGitlab)
         return res.json({status:1});
     } catch(err){
@@ -104,7 +107,7 @@ app.post('/webhooks/gitlab/:repo/:current_branch',async function(req,res,next){
 
 
 app.post('/webhooks/json/:repo/:current_branch',async function(req,res,next){
-    let callbackSuccess, script, callbackFailed, callbackLog, repo, current_branch;
+    let callbackSuccess, script, callbackFailed, callbackLog, repo, current_branch,notify_type;
     try {
         script = req.query.script;
         callbackSuccess = req.query.callback_success ? req.query.callback_success.split("|") : [];
@@ -112,6 +115,7 @@ app.post('/webhooks/json/:repo/:current_branch',async function(req,res,next){
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
         repo = req.params.repo;
         current_branch = req.params.current_branch;
+        notify_type = req.params.notify_type;
 
 
 
@@ -121,7 +125,7 @@ app.post('/webhooks/json/:repo/:current_branch',async function(req,res,next){
         // console.log(29,req.query);
 
         Controller({
-            script,callbackFailed,callbackSuccess,repo,callbackLog,current_branch
+            script,callbackFailed,callbackSuccess,repo,callbackLog,current_branch,notify_type
         },req.body,ParseJson)
         return res.json({status:1});
     } catch(err){

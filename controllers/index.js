@@ -1,4 +1,4 @@
-const {Notify, TriggerBash, ReplaceVariable} = require('../services');
+const {NotifyTelegram, NotifySlack, TriggerBash, ReplaceVariable} = require('../services');
 
 module.exports = async function(data,body,parser){
 
@@ -8,6 +8,7 @@ module.exports = async function(data,body,parser){
     let callbackLog = data.callbackLog;
     let repo = data.repo;
     let current_branch = data.current_branch;
+    let notify_type = data.notify_type;
 
     try {
         let {message, name, branch} = parser(body);
@@ -17,11 +18,13 @@ module.exports = async function(data,body,parser){
             return;
         };
 
-        // console.log(20, script);
-        // console.log(21, callbackSuccess);
-        // console.log(22, callbackFailed);
-        // console.log(23, callbackLog);
+        let Notifier = NotifyTelegram;
         
+
+        if(notify_type == 'slack'){
+            Notifier = NotifySlack;
+        };
+
         if(script){
             const regexp = new RegExp(/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i);
             const isUrl = regexp.test(script);
@@ -33,13 +36,13 @@ module.exports = async function(data,body,parser){
                 await TriggerBash(script, async function(logs){
                     logs = logs.map(log=>{
                         return {
-                            log,text:log,message:log,repo
+                            log,text:log,message:log,repo, type:'log'
                         };
                     });
 
 
                     // console.log(30, logs);q
-                    return Notify(callbackLog, logs);
+                    return Notifier(callbackLog, logs);
 
                     
                 });
@@ -51,14 +54,14 @@ module.exports = async function(data,body,parser){
 
         // console.log(47, callbackSuccess);
 
-        callbackSuccess && (await Notify(callbackSuccess,[{
-            message,name,branch,repo
+        callbackSuccess && (await Notifier(callbackSuccess,[{
+            message,name,branch,repo, type:'success'
         }]));
 
     } catch(err){
 
-        callbackFailed && (await Notify(callbackFailed, [{
-            error:err.message
+        callbackFailed && (await Notifier(callbackFailed, [{
+            error:err.message, type:'error'
         }]));
         throw err;
     };
