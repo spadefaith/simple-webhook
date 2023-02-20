@@ -20,7 +20,7 @@ module.exports = async function(data,body,parser){
 
         let Notifier = NotifyTelegram;
         
-
+        console.log(23, notify_type);
 
         if(notify_type == 'slack'){
             Notifier = NotifySlack;
