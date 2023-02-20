@@ -39,9 +39,9 @@ module.exports = async function(urls, params){
             
             let text = "";
             if(type == 'log'){
-                text = `REPOSITORY ${repo} has new COMMIT, message ${message}`;
+                text = `REPOSITORY ${repo} has new COMMIT, message: ${message}`;
             } else if (type == 'success'){
-                text = `REPOSITORY ${repo} has new COMMIT in branch ${branch}, message ${message}, by user ${name}`;
+                text = `REPOSITORY ${repo} has new COMMIT in branch ${branch}, message: ${message}, by user ${name}`;
             } else if (type == 'error'){
                 text = `simple-webhook has new error - ${error}`;
             };
