@@ -42,7 +42,7 @@ module.exports = async function(urls, params){
                 recurse(replacedUrls, function(url, index){
                                         
                     url = decodeURIComponent(url);
-                    console.log(28,url);
+                    // console.log(28,url);
 
                     return axios(url).then(res=>res.data)
                     .then(res=>{

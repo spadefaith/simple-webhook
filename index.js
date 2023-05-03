@@ -14,7 +14,7 @@ app.use(function(req,res,next){
 
 app.post('/test',async function(req,res,next){
 
-    console.log(req.body)
+    // console.log(req.body)
 
     return res.json({status:1});
 });
@@ -138,7 +138,7 @@ app.post('/webhooks/json/:repo/:current_branch',async function(req,res,next){
 
 /**replace it with notification url */
 app.use('/notify',function(req,res,next){
-    console.log(45,req.query);
+    // console.log(45,req.query);
     res.json({status:1});
 });
 
