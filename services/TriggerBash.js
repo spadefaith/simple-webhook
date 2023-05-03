@@ -18,16 +18,17 @@ module.exports = function(script, callbackLog){
           let output = [];
           child.stdout.on('data', async (data) => {
             data = data.toString();
-            // console.log(data);
+            console.log(data);
             output.push(data);
             
           });
           child.stderr.on('data', async (data) => {
             data = data.toString();
-            // console.log(data);
+            console.log(data);
             output.push(data);
           });
           child.on('close', async (code) => {
+              console.log(output);
               console.log(19,`child process exited with code ${code}`);
               await callbackLog(output);
               res(code);
