@@ -59,6 +59,8 @@ app.post('/webhooks/github/:repo/:current_branch',async function(req,res,next){
         notify_type = req.query.notify_type;
 
 
+        console.log(62,req.body);
+
 
         req.body.repo = repo;
         req.body.current_branch = current_branch;
