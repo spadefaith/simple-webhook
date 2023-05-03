@@ -42,7 +42,7 @@ module.exports = async function(data,body,parser){
 
 
                     // console.log(30, logs);q
-                    return Notifier(callbackLog, logs);
+                    return callbackLog && Notifier(callbackLog, logs);
 
                     
                 });
