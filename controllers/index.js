@@ -59,7 +59,7 @@ module.exports = async function(data,body,parser){
         }]));
 
     } catch(err){
-
+        console.log(62,err);
         callbackFailed && (await Notifier(callbackFailed, [{
             error:err.message, type:'error'
         }]));
