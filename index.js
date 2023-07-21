@@ -26,7 +26,7 @@ app.post('/webhooks/bitbucket/:repo/:current_branch',async function(req,res,next
         callbackSuccess = req.query.callback_success ? req.query.callback_success.split("|") : [];
         callbackFailed = req.query.callback_failed ? req.query.callback_failed.split("|") : [];
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
-        repo = req.params.repo;
+        repo = req.query.alias || req.params.repo;
         current_branch = req.params.current_branch;
         notify_type = req.query.notify_type;
 
@@ -54,7 +54,7 @@ app.post('/webhooks/github/:repo/:current_branch',async function(req,res,next){
         callbackSuccess = req.query.callback_success ? req.query.callback_success.split("|") : [];
         callbackFailed = req.query.callback_failed ? req.query.callback_failed.split("|") : [];
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
-        repo = req.params.repo;
+        repo = req.query.alias || req.params.repo;
         current_branch = req.params.current_branch;
         notify_type = req.query.notify_type;
 
@@ -84,7 +84,7 @@ app.post('/webhooks/gitlab/:repo/:current_branch',async function(req,res,next){
         callbackSuccess = req.query.callback_success ? req.query.callback_success.split("|") : [];
         callbackFailed = req.query.callback_failed ? req.query.callback_failed.split("|") : [];
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
-        repo = req.params.repo;
+        repo = req.query.alias || req.params.repo;
         current_branch = req.params.current_branch;
         notify_type = req.query.notify_type;
 
@@ -115,7 +115,7 @@ app.post('/webhooks/json/:repo/:current_branch',async function(req,res,next){
         callbackSuccess = req.query.callback_success ? req.query.callback_success.split("|") : [];
         callbackFailed = req.query.callback_failed ? req.query.callback_failed.split("|") : [];
         callbackLog = req.query.callback_log ? req.query.callback_log.split("|"): [];
-        repo = req.params.repo;
+        repo = req.query.alias || req.params.repo;
         current_branch = req.params.current_branch;
         notify_type = req.query.notify_type;
 
